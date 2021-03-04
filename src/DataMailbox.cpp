@@ -257,7 +257,7 @@ BasicDataMailboxMessage DataMailbox::receive(enuReceiveOptions options)
 		char* pData = new char[1]{ (char)MessageDataType::TimedOut }; // Emulate received message with datatype code = TimedOut
 		receivedMessage.setSerializedData(pData, 1);
 	}
-	else if (rawMessage.m_header.m_type == enuMessageType::EMPTY && (options & enuReceiveOptions::NONBLOCKING) != 0)
+	else if (rawMessage.m_header.m_type == enuMessageType::EMPTY && (options % enuReceiveOptions::NONBLOCKING))
 	{
 		// std::cout << "NONBLOCKING_EMPTY" << std::endl;
 		char* pData = new char[1]{ (char)MessageDataType::EmptyQueue }; // Emulate received message with datatype code = EmptyQueue
